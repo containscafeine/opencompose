@@ -1,0 +1,10 @@
+version: '0.1-dev'
+type: extension
+
+services:
+- name: database
+  containers:
+  - image: mariadb:10
+    env:
+    - name: MYSQL_USER
+      value: wordpress

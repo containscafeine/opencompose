@@ -1,0 +1,31 @@
+version: '0.1-dev'
+
+services:
+- name: database
+  containers:
+  - image: mariadb:10
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: rootpasswd
+    - name: MYSQL_DATABASE
+      value: wordpress
+    - name: MYSQL_PASSWORD
+      value: wordpress
+    ports:
+    - port: 3306
+
+- name: web
+  containers:
+  - image: wordpress:4
+    env:
+    - name: WORDPRESS_DB_HOST
+      value: database:3306
+    - name: WORDPRESS_DB_PASSWORD
+      value: wordpress
+    - name: WORDPRESS_DB_USER
+      value: wordpress
+    - name: WORDPRESS_DB_NAME
+      value: wordpress
+    ports:
+    - port: 80
+      type: external
